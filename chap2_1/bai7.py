@@ -1,22 +1,26 @@
 import matplotlib.pyplot as plt
 from chap2_1.bai5 import ExportData
 
-# ABC, CBS, FOX, NBC
-export_data = ExportData('2012networks.xlsx')
+# Excellent (E), Very Good (V), Good (G), Fair (F), Poor (P)
+export_data = ExportData('airsurvey.xlsx')
 data_input = {
-    'abc': {
+    'e': {
         'freq': 0,
         'per_freq': 0
     },
-    'cbs': {
+    'v': {
         'freq': 0,
         'per_freq': 0
     },
-    'fox': {
+    'g': {
         'freq': 0,
         'per_freq': 0
     },
-    'nbc': {
+    'f': {
+        'freq': 0,
+        'per_freq': 0
+    },
+    'p': {
         'freq': 0,
         'per_freq': 0
     }
@@ -26,7 +30,7 @@ export_data.change_data_input(data_input)
 
 def show_table_freq():
     fig, ax = plt.subplots(1, 1)
-    column_labels = ["Shows", "Relative Frequency", "Percent Frequency"]
+    column_labels = ["Flight Rating", "Relative Frequency", "Percent Frequency"]
     ax.axis('tight')
     ax.axis('off')
     table_data = []
@@ -42,24 +46,4 @@ def show_table_freq():
     plt.show()
 
 
-def show_bar_chart():
-    data = export_data.data_input
-    plt.style.use('ggplot')
-    show_name = []
-    show_data = []
-
-    for key in data:
-        show_name.append(str(key).upper())
-        show_data.append(data[key]['freq'])
-
-    x_pos = [i for i, _ in enumerate(show_name)]
-    plt.bar(x_pos, show_data, color='green')
-    plt.xlabel('Show Name')
-    plt.ylabel('Frequency')
-
-    plt.xticks(x_pos, show_name)
-    plt.show()
-
-
-# show_table_freq()
-show_bar_chart()
+show_table_freq()
