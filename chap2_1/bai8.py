@@ -1,36 +1,54 @@
 import matplotlib.pyplot as plt
 from chap2_1.bai5 import ExportData
 
-# Excellent (E), Very Good (V), Good (G), Fair (F), Poor (P)
-export_data = ExportData('airsurvey.xlsx')
+# (P) Pitcher, (H) Catcher, (1) 1st base, (2) 2nd base, (3) 3rd base, (S) Shortstop,
+# (L) Left field, (C) Center Field, (R) Right Field
+
+export_data = ExportData('baseballhall.xlsx')
+export_data.row_idx = 1
 data_input = {
-    'e': {
-        'freq': 0,
-        'per_freq': 0
-    },
-    'v': {
-        'freq': 0,
-        'per_freq': 0
-    },
-    'g': {
-        'freq': 0,
-        'per_freq': 0
-    },
-    'f': {
-        'freq': 0,
-        'per_freq': 0
-    },
     'p': {
+        'freq': 0,
+        'per_freq': 0
+    },
+    'h': {
+        'freq': 0,
+        'per_freq': 0
+    },
+    '1': {
+        'freq': 0,
+        'per_freq': 0
+    },
+    '2': {
+        'freq': 0,
+        'per_freq': 0
+    },
+    '3': {
+        'freq': 0,
+        'per_freq': 0
+    },
+    's': {
+        'freq': 0,
+        'per_freq': 0
+    },
+    'l': {
+        'freq': 0,
+        'per_freq': 0
+    },
+    'c': {
+        'freq': 0,
+        'per_freq': 0
+    },
+    'r': {
         'freq': 0,
         'per_freq': 0
     }
 }
 export_data.change_data_input(data_input)
 
-
 def show_table_freq():
     fig, ax = plt.subplots(1, 1)
-    column_labels = ["Flight Rating", "Relative Frequency", "Percent Frequency"]
+    column_labels = ["Position", "Relative Frequency", "Percent Frequency"]
     ax.axis('tight')
     ax.axis('off')
     table_data = []
@@ -46,23 +64,4 @@ def show_table_freq():
     plt.show()
 
 
-def show_bar_chart():
-    plt.style.use('ggplot')
-    labels = ['Excellent', 'Very Good', 'Good', 'Fair', 'Poor']
-    data = []
-
-    x_pos = [i for i, _ in enumerate(labels)]
-
-    for key in export_data.data_input:
-        data.append(export_data.data_input[key]['freq'])
-
-    plt.bar(x_pos, data, color='green')
-    plt.ylabel('Frequency')
-    plt.xlabel('Points')
-
-    plt.xticks(x_pos, labels)
-    plt.show()
-
-
-# show_table_freq()
-show_bar_chart()
+show_table_freq()

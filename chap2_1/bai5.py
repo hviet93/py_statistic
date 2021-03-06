@@ -32,6 +32,7 @@ class ExportData:
         }
         self.wb_obj = openpyxl.load_workbook('./../' + str(file_name))
         self.column_idx = 1
+        self.row_idx = 2
         self.max_items = 0
         self.calc_data()
         self.calc_percent_data()
@@ -46,11 +47,14 @@ class ExportData:
         m_row = sheet_obj.max_row
         self.max_items = 0
 
-        for i in range(2, m_row + 1):
+        for i in range(self.row_idx, m_row + 1):
             cell_obj = sheet_obj.cell(row=i, column=self.column_idx)
 
             if cell_obj.value is not None:
-                cell_value = cell_obj.value.lower()
+                if isinstance(cell_obj.value, int):
+                    cell_value = str(cell_obj.value)
+                else:
+                    cell_value = cell_obj.value.lower()
                 self.max_items += 1
 
                 if cell_value in self.data_input:
