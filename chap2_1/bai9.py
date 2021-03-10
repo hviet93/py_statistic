@@ -21,6 +21,10 @@ class ExportTwoDegree:
                 'freq': 0,
                 'per_freq': 0
             },
+            'h': {
+                'freq': 0,
+                'per_freq': 0
+            },
             'e': {
                 'freq': 0,
                 'per_freq': 0
@@ -73,13 +77,13 @@ class ExportTwoDegree:
             self.data_collection[key_item] = data_item
 
     def show_freq_table(self):
-        fig, ax = plt.subplots(1, 1)
-        column_labels = ["Name", "Relative Frequency", "Percent Frequency"]
-        ax.axis('tight')
-        ax.axis('off')
-        table_data = []
-
+        print(self.data_collection)
         for keyItem in self.data_collection:
+            fig, ax = plt.subplots(1, 1)
+            column_labels = ["Name", "Relative Frequency", "Percent Frequency"]
+            ax.axis('tight')
+            ax.axis('off')
+            table_data = []
             data = self.data_collection[keyItem]
 
             for key in data:
@@ -89,7 +93,38 @@ class ExportTwoDegree:
             table_data.append(['Total', self.max_items, 100])
             ax.table(cellText=table_data, colLabels=column_labels, loc="center")
 
-        plt.show()
+            plt.show()
+
+    def show_bar_chart(self):
+        plt.style.use('ggplot')
+
+        for keyItem in self.data_collection:
+            fig, ax = plt.subplots()
+            labels = [
+                'Business', 'Computer Sciences and Engineering', 'Education',
+                'Humanities', 'Naturel Sciences and Mathematics',
+                'Social and Behavioral Sciences', 'Other'
+            ]
+            data = self.data_collection[keyItem]
+            bar_data = []
+
+            for key in data:
+                bar_data.append(data[key]['freq'])
+
+            x_pos = [i for i, _ in enumerate(labels)]
+            plt.bar(x_pos, bar_data, color='green')
+            plt.xlabel('Degrees')
+            plt.ylabel('Frequency')
+
+            if keyItem == 'bachelor':
+                plt.title('Percent Frequency of Bachelor Degrees')
+            else:
+                plt.title('Percent Frequency of Master Degrees')
+
+            plt.xticks(x_pos, labels)
+            plt.setp(ax.get_xticklabels(), rotation=30, horizontalalignment='right')
+            plt.tight_layout()
+            plt.show()
 
     def reset_input_data(self):
         self.data_input = {
@@ -98,6 +133,10 @@ class ExportTwoDegree:
                 'per_freq': 0
             },
             'cse': {
+                'freq': 0,
+                'per_freq': 0
+            },
+            'h': {
                 'freq': 0,
                 'per_freq': 0
             },
@@ -124,6 +163,7 @@ def main():
     export_data = ExportTwoDegree()
     export_data.calc_data()
     export_data.show_freq_table()
+    # export_data.show_bar_chart()
 
 
 main()
