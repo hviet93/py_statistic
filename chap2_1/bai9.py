@@ -77,7 +77,6 @@ class ExportTwoDegree:
             self.data_collection[key_item] = data_item
 
     def show_freq_table(self):
-        print(self.data_collection)
         for keyItem in self.data_collection:
             fig, ax = plt.subplots(1, 1)
             column_labels = ["Name", "Relative Frequency", "Percent Frequency"]

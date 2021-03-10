@@ -16,7 +16,3 @@ plt.title("Energy output from various fuel sources")
 plt.xticks(x_pos, x)
 
 plt.show()
-
-# (B) Business, (CSE) Computer Sciences and Engineering, (E) Education,
-# (H) Humanities, (NSM) Naturel Sciences and Mathematics,
-# (SBS) Social and Behavioral Sciences, (O) Other
