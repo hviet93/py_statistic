@@ -1,3 +1,4 @@
+import numpy as np
 import matplotlib.pyplot as plt
 
 
@@ -26,6 +27,8 @@ class CumulativeDataExport:
                 'freq': 2
             }
         }
+        self.labels = []
+        self.data = []
 
     def calc_data(self):
         total = 0
@@ -38,6 +41,10 @@ class CumulativeDataExport:
             ]
             self.table_data.append(sub_data)
 
+        for key in self.data_input:
+            self.labels.append(str(key).replace("_", " - "))
+            self.data.append(self.data_input[key]['freq'])
+
     def show_table_data(self):
         fig, ax = plt.subplots(1, 1)
         column_labels = ["Group", "Cumulative Frequency", "Cumulative Relative Frequency"]
@@ -48,16 +55,19 @@ class CumulativeDataExport:
         plt.show()
 
     def show_histogram(self):
-        labels = []
-        data = []
+        x_pos = [i for i, _ in enumerate(self.labels)]
+        plt.bar(x_pos, self.data, color='green', width=1.0, edgecolor='black')
+        plt.xticks(x_pos, self.labels)
 
-        for key in self.data_input:
-            labels.append(str(key).replace("_", " - "))
-            data.append(self.data_input[key]['freq'])
+        plt.show()
 
-        # x_pos = [i for i, _ in enumerate(labels)]
-        fig, (ax1) = plt.subplots(nrows=1)
-        ax1.hist(data, cumulative=True)
+    def show_ogive(self):
+        cumulative_data = [10, 24, 41, 48, 50]
+        intervals = [10, 20, 30, 40, 50, 60]
+        # values, base = np.histogram(self.data, bins=intervals)
+        values, base = np.histogram(cumulative_data, bins=intervals)
+        cumsum = np.cumsum(values)
+        plt.plot(base[1:], cumsum, color='red', marker='o', linestyle='-')
 
         plt.show()
 
@@ -67,7 +77,8 @@ def main():
     export_data.calc_data()
 
     # export_data.show_table_data()
-    export_data.show_histogram()
+    # export_data.show_histogram()
+    export_data.show_ogive()
 
 
 main()
