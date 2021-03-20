@@ -23,3 +23,9 @@ plt.xlabel('Marks in End-Term')
 plt.ylabel('Cumulative Frequency')
 
 plt.show()
+
+# https://www.statology.org/ogive-python/
+# def show_ogive(self):
+#     values, base = np.histogram(self.data, bins=5)
+#     plt.plot(base[:-1], self.cumulative_data, 'ro-')
+#     plt.show()
