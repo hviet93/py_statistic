@@ -29,6 +29,7 @@ class CumulativeDataExport:
         }
         self.labels = []
         self.data = []
+        self.cumulative_data = []
 
     def calc_data(self):
         total = 0
@@ -40,6 +41,7 @@ class CumulativeDataExport:
                 total, total / 50
             ]
             self.table_data.append(sub_data)
+            self.cumulative_data.append(total)
 
         for key in self.data_input:
             self.labels.append(str(key).replace("_", " - "))
@@ -62,13 +64,8 @@ class CumulativeDataExport:
         plt.show()
 
     def show_ogive(self):
-        cumulative_data = [10, 24, 41, 48, 50]
-        intervals = [10, 20, 30, 40, 50, 60]
-        # values, base = np.histogram(self.data, bins=intervals)
-        values, base = np.histogram(cumulative_data, bins=intervals)
-        cumsum = np.cumsum(values)
-        plt.plot(base[1:], cumsum, color='red', marker='o', linestyle='-')
-
+        values, base = np.histogram(self.data, bins=5)
+        plt.plot(base[:-1], self.cumulative_data, 'ro-')
         plt.show()
 
 
