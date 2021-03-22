@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import openpyxl
-from array import array
 
 
 class ExportData14:
@@ -100,9 +99,11 @@ class ExportData14:
     def show_dot_diagram(self):
         # plt.scatter(self.dot_data, 'go')
         x_data = [
-            1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-            11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+            6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0, 9.5,
+            10.0, 10.5, 11.0, 11.5, 12.0, 12.5, 13.0,
+            13.5, 14.0, 14.5, 15.0, 15.9
         ]
+
         plt.scatter(x=x_data, y=self.dot_data)
         plt.show()
 
