@@ -96,6 +96,30 @@ class ExportData14:
         ax.table(cellText=self.table_data, colLabels=column_labels, loc="center")
         plt.show()
 
+    def show_table_freq_data(self):
+        self.table_data = []
+
+        for key in self.data_input:
+            data_freq = self.data_input[key]['freq']
+            self.data_input[key]['per_freq'] = round(data_freq / self.max_items * 100)
+
+        fig, ax = plt.subplots(1, 1)
+        column_labels = ["Group", "Frequency Distribution", "Percent Frequency Distribution"]
+        ax.axis('tight')
+        ax.axis('off')
+
+        for key in self.data_input:
+            label = self.data_input[key]['label']
+            freq = self.data_input[key]['freq']
+            per_freq = self.data_input[key]['per_freq']
+            sub_data = [label, freq, per_freq]
+            self.table_data.append(sub_data)
+
+        self.table_data.append(['Total', self.max_items, 100])
+        ax.table(cellText=self.table_data, colLabels=column_labels, loc="center")
+
+        plt.show()
+
     def show_dot_diagram(self):
         # plt.scatter(self.dot_data, 'go')
         x_data = [
@@ -113,7 +137,8 @@ def main():
 
     export_data.calc_data()
     # export_data.show_table_data()
-    export_data.show_dot_diagram()
+    # export_data.show_dot_diagram()
+    export_data.show_table_freq_data()
 
 
 main()
