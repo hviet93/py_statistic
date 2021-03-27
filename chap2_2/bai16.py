@@ -1,5 +1,3 @@
-import numpy as np
-
 
 def main():
     data = [
@@ -21,17 +19,13 @@ def main():
     stem_leaf_data = sorted(stem_leaf_data)
 
     for stem_leaf in stem_leaf_data:
-        print(stem_leaf[0])
-        print(type(stem_leaf[1]))
+        stem_leaf_str = str(stem_leaf[0]) + " | "
+        stem_leaf[1].sort()
 
-    # for stem_leaf in stem_leaf_data:
-    #     stem_leaf_str = str(stem_leaf) + " | "
-    #     stem_leaf_data[stem_leaf] = np.sort(stem_leaf_data[stem_leaf])[::1]
-    #
-    #     for leaf_val in stem_leaf_data[stem_leaf]:
-    #         stem_leaf_str = stem_leaf_str + str(leaf_val) + " "
-    #
-    #     print(stem_leaf_str)
+        for leaf_val in stem_leaf[1]:
+            stem_leaf_str = stem_leaf_str + " " + str(leaf_val)
+
+        print(stem_leaf_str)
 
 
 main()
