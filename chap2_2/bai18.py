@@ -12,9 +12,6 @@ import matplotlib.pyplot as plt
 wb_obj = openpyxl.load_workbook('./../data_sample/data_2_2/nbaplayerpts.xlsx')
 sheet_obj = wb_obj.active
 m_row = sheet_obj.max_row
-fig, ax = plt.subplots(1, 1)
-ax.axis('tight')
-ax.axis('off')
 data_input = {
     '10_12': {
         'label': '10 - 12',
@@ -87,6 +84,9 @@ def calc_data_ppg():
 
 
 def show_table_freq_data():
+    fig, ax = plt.subplots(1, 1)
+    ax.axis('tight')
+    ax.axis('off')
     column_labels = ["PPG", "Frequency Distribution", "Relative Frequency Distribution"]
     table_data = []
 
@@ -102,5 +102,44 @@ def show_table_freq_data():
     plt.show()
 
 
+def show_cumulative_table_data():
+    fig, ax = plt.subplots(1, 1)
+    ax.axis('tight')
+    ax.axis('off')
+    column_labels = ["PPG", "Cumulative Frequency Distribution", "Relative Cumulative Frequency Distribution"]
+    table_data = []
+    global total
+
+    for key in data_input:
+        total += data_input[key]['freq']
+        sub_data = [
+            data_input[key]['label'], total, total / max_items
+        ]
+        table_data.append(sub_data)
+
+    ax.table(cellText=table_data, colLabels=column_labels, loc="center")
+
+    plt.show()
+
+
+def show_histogram():
+    labels = []
+    data_freq = []
+
+    for key in data_input:
+        labels.append(data_input[key]['label'])
+        data_freq.append(data_input[key]['freq'])
+
+    x_pos = [i for i, _ in enumerate(labels)]
+    plt.bar(x_pos, data_freq, color='green', width=1.0, edgecolor='black')
+    plt.xticks(x_pos, labels)
+    plt.xlabel('Frequency')
+    plt.ylabel('PPG')
+
+    plt.show()
+
+
 calc_data_ppg()
-show_table_freq_data()
+# show_table_freq_data()
+# show_cumulative_table_data()
+show_histogram()

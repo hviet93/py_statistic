@@ -74,8 +74,8 @@ def main():
     export_data.calc_data()
 
     # export_data.show_table_data()
-    # export_data.show_histogram()
-    export_data.show_ogive()
+    export_data.show_histogram()
+    # export_data.show_ogive()
 
 
 main()
