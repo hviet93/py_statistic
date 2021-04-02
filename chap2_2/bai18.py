@@ -133,8 +133,8 @@ def show_histogram():
     x_pos = [i for i, _ in enumerate(labels)]
     plt.bar(x_pos, data_freq, color='green', width=1.0, edgecolor='black')
     plt.xticks(x_pos, labels)
-    plt.xlabel('Frequency')
-    plt.ylabel('PPG')
+    plt.xlabel('PPG')
+    plt.ylabel('Frequency')
 
     plt.show()
 
