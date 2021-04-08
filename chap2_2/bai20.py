@@ -123,7 +123,7 @@ def show_histogram():
     plt.style.use('ggplot')
     labels = []
     data_freq = []
-    fig, ax = plt.subplots()
+    # fig, ax = plt.subplots()
 
     for key in data_input:
         labels.append(data_input[key]['label'])
