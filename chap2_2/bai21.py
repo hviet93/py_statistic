@@ -1,9 +1,7 @@
 import openpyxl
 import matplotlib.pyplot as plt
-import matplotlib as mpl
 
 wb_obj = openpyxl.load_workbook('./../data_sample/data_2_2/largecorp.xlsx')
-# mpl.rcParams['figure.dpi'] = 600
 sheet_obj = wb_obj.active
 m_row = sheet_obj.max_row
 data_corp = []
