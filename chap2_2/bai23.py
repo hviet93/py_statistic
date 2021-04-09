@@ -2,7 +2,7 @@ import openpyxl
 import matplotlib.pyplot as plt
 
 wb_obj = openpyxl.load_workbook('./../data_sample/data_2_2/marketindexes.xlsx')
-sheet_obj = wb_obj.active
+sheet_obj = wb_obj['Data']
 m_row = sheet_obj.max_row
 data_index = []
 max_items = 0
@@ -127,8 +127,8 @@ def calc_data_index():
 
     for key in data_input:
         freq_val = data_input[key]['freq']
-        data_input[key]['per_freq'] = round(freq_val / max_items, 2)
-        # data_input[key]['per_freq'] = freq_val / max_items
+        # data_input[key]['per_freq'] = round(freq_val / max_items, 3)
+        data_input[key]['per_freq'] = freq_val / max_items
 
 
 def show_table_freq_data():
@@ -149,13 +149,35 @@ def show_table_freq_data():
         total_relative += data_input[key]['per_freq']
         table_data.append(sub_data)
 
-    table_data.append(['Total', total_freq, round(total_relative, 2)])
-    # table_data.append(['Total', total_freq, total_relative])
+    # table_data.append(['Total', total_freq, round(total_relative, 3)])
+    table_data.append(['Total', total_freq, total_relative])
     ax.table(cellText=table_data, colLabels=column_labels, loc="center")
+
+    plt.show()
+
+
+def show_histogram():
+    plt.style.use('ggplot')
+    fig, ax = plt.subplots()
+    labels = []
+    data_freq = []
+
+    for key in data_input:
+        labels.append(data_input[key]['label'])
+        data_freq.append(data_input[key]['freq'])
+
+    x_pos = [i for i, _ in enumerate(labels)]
+    plt.bar(x_pos, data_freq, color='green', width=1.0, edgecolor='black')
+    plt.xticks(x_pos, labels)
+    plt.xlabel('Indexes')
+    plt.ylabel('Frequency')
+    plt.setp(ax.get_xticklabels(), rotation=30, horizontalalignment='right')
+    fig.tight_layout()
 
     plt.show()
 
 
 import_data_array()
 calc_data_index()
-show_table_freq_data()
+# show_table_freq_data()
+show_histogram()
