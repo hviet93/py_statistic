@@ -43,8 +43,7 @@ def show_stem_leaf_chart():
 
     stem_leaf_starting = stem_leaf_starting.items()
     stem_leaf_starting = sorted(stem_leaf_starting)
-    stem_leaf_mid = stem_leaf_mid.items()
-    stem_leaf_mid = sorted(stem_leaf_mid)
+    stem_leaf_mid = sorted(stem_leaf_mid.items(), key=lambda x: int(x[0]))
 
     for i in range(0, len(stem_leaf_starting)):
         stem_leaf_str = str(stem_leaf_starting[i][0]) + " | "
@@ -53,14 +52,16 @@ def show_stem_leaf_chart():
         for leaf_val in stem_leaf_starting[i][1]:
             stem_leaf_str = stem_leaf_str + " " + str(leaf_val)
 
+        # print(stem_leaf_str)
+
     for i in range(0, len(stem_leaf_mid)):
-        stem_leaf_str2 = str(stem_leaf_mid[i][0]) + " | "
+        stem_leaf_str2 = " " + str(stem_leaf_mid[i][0]) + " | " if int(stem_leaf_mid[i][0]) < 10 \
+            else str(stem_leaf_mid[i][0]) + " | "
         stem_leaf_mid[i][1].sort()
 
         for leaf_val in stem_leaf_mid[i][1]:
             stem_leaf_str2 = stem_leaf_str2 + " " + str(leaf_val)
 
-        # print(stem_leaf_str)
         print(stem_leaf_str2)
 
 
