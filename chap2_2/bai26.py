@@ -32,12 +32,20 @@ def show_stem_leaf_char():
     for stem_leaf in stem_leaf_marathon:
         stem_leaf_str = ' ' + str(stem_leaf[0]) + ' | ' if int(stem_leaf[0]) < 10 \
             else str(stem_leaf[0]) + ' | '
+        stem_leaf_stretched_str = stem_leaf_str[:]
+        stem_leaf_stretched_length = len(stem_leaf_stretched_str)
         stem_leaf[1].sort()
 
         for leaf_val in stem_leaf[1]:
-            stem_leaf_str = stem_leaf_str + ' ' + str(leaf_val)
+            if leaf_val < 5:
+                stem_leaf_str = stem_leaf_str + ' ' + str(leaf_val)
+            else:
+                stem_leaf_stretched_str = stem_leaf_stretched_str + ' ' + str(leaf_val)
 
         print(stem_leaf_str)
+
+        if len(stem_leaf_stretched_str) > stem_leaf_stretched_length:
+            print(stem_leaf_stretched_str)
 
 
 import_data_array()
